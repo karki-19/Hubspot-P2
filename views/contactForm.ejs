@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        #contactForm {
+            max-width: 400px;
+            margin:  auto;
+            padding: 50px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            width: 100px;
+            background-color: #007bff;
+            font-weight:600 ;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 40px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Contact Form</h2>
+    <form id="contactForm" method="post" action="/contacts">
+        <label for="firstmame">First Name:</label>
+        <input type="text" id="firstName" name="firstname" required>
+        <span id="firstNameError" class="error-message"></span>
+
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastName" name="lastname" required>
+        <span id="lastNameError" class="error-message"></span>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error-message"></span>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
+        <span id="phoneError" class="error-message"></span>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const form = document.getElementById("contactForm");
+
+        form.addEventListener("submit", function (event) {
+            let valid = true;
+
+            // Clear error messages
+            const errorMessages = document.querySelectorAll(".error-message");
+            errorMessages.forEach((errorMessage) => {
+                errorMessage.textContent = "";
+            });
+
+            // Validate First Name
+            const firstName = form.elements.firstName;
+            if (!firstName.validity.valid) {
+                valid = false;
+                document.getElementById("firstNameError").textContent = "Please enter a valid first name.";
+            }
+
+            // Validate Last Name
+            const lastName = form.elements.lastName;
+            if (!lastName.validity.valid) {
+                valid = false;
+                document.getElementById("lastNameError").textContent = "Please enter a valid last name.";
+            }
+
+            // Validate Email
+            const email = form.elements.email;
+            if (!email.validity.valid) {
+                valid = false;
+                document.getElementById("emailError").textContent = "Please enter a valid email address.";
+            }
+
+            // Validate Phone (if provided)
+            const phone = form.elements.phone;
+            if (phone.value && !phone.validity.valid) {
+                valid = false;
+                document.getElementById("phoneError").textContent = "Please enter a valid 10-digit phone number.";
+            }
+
+            if (!valid) {
+                event.preventDefault(); // Prevent form submission if there are validation errors.
+            }
+        });
+    </script>
+</body>
+</html>

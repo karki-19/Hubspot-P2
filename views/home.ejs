@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .buttonClass{
+            margin-top: 10%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to HubSpot Home Page</h1>
+    </div>
+    <h1>Examples of Contacts created on Hubspot are shown below</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% dataArray.forEach(item => { %>
+            <tr>
+                <td><%= item.hs_object_id%></td>
+                <td><%= item.firstname %></td>
+                <td><%= item.lastname %></td>
+                <td><%= item.email %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <div class="buttonClass">
+        <a href="<%= hostUrl %>">
+            <button>Click Here To Register Yourself</button>
+        </a>
+    </div>
+</body>
+</html>
